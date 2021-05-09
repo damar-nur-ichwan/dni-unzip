@@ -2,11 +2,7 @@ const fs = require('fs');
 const unzipper = require('unzipper');
 
 function Unzip(source, path) {
-  if (source.includes('.zip')) {
-    fs.createReadStream(source).pipe(unzipper.Extract({path}));
-  } else {
-    console.log('can not extract your file!');
-  }
+    return fs.createReadStream(source).pipe(unzipper.Extract({path})).promise().then(() => {return 'Unzip success!'}).catch(()=>{return 'File type is not zip!'})
 }
 module.exports = Unzip;
 
